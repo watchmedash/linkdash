@@ -11,16 +11,6 @@
   --font-mono: 'IBM Plex Mono', 'Cascadia Code', Consolas, monospace;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #111110;
-    --fg: #f0f0ee;
-    --muted: #888885;
-    --border: #272725;
-    --tag-bg: #1e1e1c;
-    --featured-border: #f0f0ee;
-  }
-}
 
 *, *::before, *::after {
   box-sizing: border-box;
