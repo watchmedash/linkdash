@@ -1,16 +1,15 @@
-/* Single centered column — avatar → featured link → two code-comment sections */
 :root {
-  --bg: #f8f8f6;
-  --fg: #0f0f0e;
-  --muted: #6b6b68;
-  --border: #e0e0dc;
-  --tag-bg: #eaeae7;
-  --featured-border: #0f0f0e;
-  --radius: 9px;
+  --bg: #ffffff;
+  --fg: #0f0f0d;
+  --muted: #888882;
+  --border: #e8e8e4;
+  --surface: #f5f5f2;
+  --yt-red: #ff0000;
+  --radius: 12px;
+  --icon-radius: 10px;
   --font-sans: 'IBM Plex Sans', system-ui, sans-serif;
-  --font-mono: 'IBM Plex Mono', 'Cascadia Code', Consolas, monospace;
+  --font-mono: 'IBM Plex Mono', Consolas, monospace;
 }
-
 
 *, *::before, *::after {
   box-sizing: border-box;
@@ -23,125 +22,183 @@ body {
   color: var(--fg);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
-  padding: 64px max(16px, env(safe-area-inset-left, 16px)) 96px max(16px, env(safe-area-inset-right, 16px));
+  padding-block: 60px 96px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
 }
 
 .wrap {
-  max-width: 440px;
+  max-width: 480px;
   margin: 0 auto;
-  display: flex;
-  flex-direction: column;
 }
 
-/* Header */
-.header {
+/* ── Header ── */
+header {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
   margin-bottom: 40px;
-  gap: 12px;
+  gap: 10px;
 }
 
 .avatar {
-  width: 60px;
-  height: 60px;
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
-  background: var(--fg);
-  color: var(--bg);
-  font-family: var(--font-mono);
-  font-size: 1.1rem;
-  font-weight: 500;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  object-fit: cover;
+  border: 2px solid var(--border);
 }
 
-.header h1 {
-  font-size: 1.5rem;
-  font-weight: 600;
-  letter-spacing: -0.03em;
+header h1 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  letter-spacing: -0.04em;
   line-height: 1;
 }
 
-.header p {
+.role {
   font-family: var(--font-mono);
   font-size: 0.75rem;
+  font-weight: 500;
   color: var(--muted);
   letter-spacing: 0.04em;
 }
 
-/* Featured card */
-.featured {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 13px 15px;
-  border: 1.5px solid var(--featured-border);
-  border-radius: var(--radius);
-  text-decoration: none;
-  color: var(--fg);
-  margin-bottom: 36px;
-  transition: opacity 0.12s;
-}
-
-.featured:hover { opacity: 0.65; }
-
-.featured:focus-visible {
-  outline: 2px solid var(--fg);
-  outline-offset: 3px;
-}
-
-.featured .name {
-  flex: 1;
-  font-family: var(--font-mono);
-  font-size: 0.875rem;
-  font-weight: 500;
-}
-
-/* Sections */
-.section {
+/* ── Section labels ── */
+section {
   margin-bottom: 32px;
 }
 
 .section-label {
   font-family: var(--font-mono);
   font-size: 0.6875rem;
+  font-weight: 500;
   color: var(--muted);
-  letter-spacing: 0.04em;
+  letter-spacing: 0.05em;
   margin-bottom: 10px;
 }
 
-.links {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.link-card {
+/* ── Base card ── */
+.card {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 12px 15px;
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
   text-decoration: none;
   color: var(--fg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin-bottom: 8px;
+  transition: box-shadow 0.15s, border-color 0.15s;
   background: var(--bg);
-  transition: background 0.12s, border-color 0.12s;
 }
 
-.link-card:hover {
-  background: var(--tag-bg);
-  border-color: var(--muted);
+.card:hover {
+  box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+  border-color: #ccccc8;
 }
 
-.link-card:focus-visible {
+.card:focus-visible {
   outline: 2px solid var(--fg);
-  outline-offset: 3px;
+  outline-offset: 2px;
 }
 
-.link-card .name {
+/* ── YouTube card ── */
+.card-yt {
+  background: var(--yt-red);
+  border-color: var(--yt-red);
+  padding: 14px 16px;
+  gap: 12px;
+  margin-bottom: 32px;
+  color: #fff;
+}
+
+.card-yt:hover {
+  box-shadow: 0 4px 20px rgba(255,0,0,0.25);
+  border-color: var(--yt-red);
+}
+
+.yt-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.card-yt .card-name {
+  flex: 1;
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #fff;
+}
+
+.card-yt .arr {
+  color: rgba(255,255,255,0.7);
+}
+
+/* ── Cover card (games with art) ── */
+.card-cover {
+  flex-direction: column;
+  align-items: stretch;
+  padding: 0;
+}
+
+.cover-wrap {
+  width: 100%;
+  height: 160px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.cover-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.card-foot {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+}
+
+.card-foot .card-name {
+  flex: 1;
+  font-size: 0.9375rem;
+  font-weight: 600;
+}
+
+/* ── Icon card (apps) ── */
+.card-icon {
+  padding: 12px 14px;
+  gap: 12px;
+}
+
+.app-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--icon-radius);
+  object-fit: cover;
+  flex-shrink: 0;
+  border: 1px solid var(--border);
+}
+
+.app-icon.placeholder {
+  background: var(--surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  color: var(--muted);
+  border: 1px solid var(--border);
+}
+
+.card-icon .card-name {
   flex: 1;
   font-size: 0.9rem;
   font-weight: 500;
@@ -151,25 +208,27 @@ body {
   text-overflow: ellipsis;
 }
 
+/* ── Shared: tag + arrow ── */
 .tag {
   font-family: var(--font-mono);
   font-size: 0.625rem;
   font-weight: 500;
   color: var(--muted);
-  background: var(--tag-bg);
+  background: var(--surface);
   padding: 3px 7px;
-  border-radius: 4px;
-  letter-spacing: 0.06em;
+  border-radius: 5px;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
+  white-space: nowrap;
   flex-shrink: 0;
 }
 
-.arrow {
+.arr {
   color: var(--muted);
-  font-size: 0.8rem;
+  font-size: 0.875rem;
   flex-shrink: 0;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .featured, .link-card { transition: none; }
+  .card { transition: none; }
 }
