@@ -132,6 +132,9 @@ a:focus-visible { outline: 2px solid var(--signal); outline-offset: 2px; }
 }
 
 .yt:hover { background: #e00000; }
+.yt.tt { margin-top: 8px; background: #0b0f14; }
+.yt.tt:hover { background: #1c232d; }
+.yt.tt .yt-name { text-transform: none; }
 .yt svg { flex-shrink: 0; }
 .yt-text { flex: 1; min-width: 0; }
 .yt-kicker { display: block; font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; opacity: 0.8; }
