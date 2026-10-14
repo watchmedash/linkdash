@@ -11,11 +11,7 @@
   --font-mono: 'IBM Plex Mono', Consolas, monospace;
 }
 
-*, *::before, *::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
   background: var(--bg);
@@ -27,10 +23,7 @@ body {
   padding-right: max(16px, env(safe-area-inset-right, 0px));
 }
 
-.wrap {
-  max-width: 480px;
-  margin: 0 auto;
-}
+.wrap { max-width: 480px; margin: 0 auto; }
 
 /* ── Header ── */
 header {
@@ -65,10 +58,8 @@ header h1 {
   letter-spacing: 0.04em;
 }
 
-/* ── Section labels ── */
-section {
-  margin-bottom: 32px;
-}
+/* ── Sections ── */
+section { margin-bottom: 32px; }
 
 .section-label {
   font-family: var(--font-mono);
@@ -79,7 +70,7 @@ section {
   margin-bottom: 10px;
 }
 
-/* ── Base card ── */
+/* ── Base card shell ── */
 .card {
   display: flex;
   align-items: center;
@@ -89,19 +80,16 @@ section {
   border-radius: var(--radius);
   overflow: hidden;
   margin-bottom: 8px;
-  transition: box-shadow 0.15s, border-color 0.15s;
   background: var(--bg);
+  transition: box-shadow 0.15s, border-color 0.15s;
 }
 
-.card:hover {
+.card:is(a):hover {
   box-shadow: 0 4px 20px rgba(0,0,0,0.07);
   border-color: #ccccc8;
 }
 
-.card:focus-visible {
-  outline: 2px solid var(--fg);
-  outline-offset: 2px;
-}
+.card:is(a):focus-visible { outline: 2px solid var(--fg); outline-offset: 2px; }
 
 /* ── YouTube card ── */
 .card-yt {
@@ -114,89 +102,79 @@ section {
 }
 
 .card-yt:hover {
-  box-shadow: 0 4px 20px rgba(255,0,0,0.25);
-  border-color: var(--yt-red);
+  box-shadow: 0 4px 20px rgba(255,0,0,0.25) !important;
+  border-color: var(--yt-red) !important;
 }
 
-.yt-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
+.yt-icon { display: flex; align-items: center; flex-shrink: 0; }
+.card-yt .card-name { flex: 1; font-family: var(--font-mono); font-size: 0.875rem; font-weight: 500; color: #fff; }
+.card-yt .arr { color: rgba(255,255,255,0.7); }
 
-.card-yt .card-name {
-  flex: 1;
-  font-family: var(--font-mono);
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: #fff;
-}
-
-.card-yt .arr {
-  color: rgba(255,255,255,0.7);
-}
-
-/* ── Cover card (games with art) ── */
-.card-cover {
+/* ── Cover-art game card (multi-platform) ── */
+.card-game {
   flex-direction: column;
   align-items: stretch;
   padding: 0;
 }
 
-.cover-wrap {
-  width: 100%;
-  height: 160px;
-  overflow: hidden;
-  flex-shrink: 0;
-}
+.cover-wrap { width: 100%; height: 160px; overflow: hidden; flex-shrink: 0; }
+.cover-img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-.cover-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-.card-foot {
+.game-foot {
   display: flex;
   align-items: center;
   gap: 10px;
   padding: 12px 14px;
+  flex-wrap: wrap;
 }
 
-.card-foot .card-name {
+.game-name {
   flex: 1;
-  font-size: 0.9375rem;
+  font-size: 0.9rem;
   font-weight: 600;
+  min-width: 0;
 }
 
-/* ── Icon card (apps) ── */
-.card-icon {
+/* ── Icon + multi-platform card ── */
+.card-multi {
   padding: 12px 14px;
   gap: 12px;
+  flex-wrap: wrap;
 }
 
-.app-icon {
-  width: 44px;
-  height: 44px;
-  border-radius: var(--icon-radius);
-  object-fit: cover;
-  flex-shrink: 0;
-  border: 1px solid var(--border);
+.card-multi .card-name {
+  flex: 1;
+  font-size: 0.9rem;
+  font-weight: 500;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.app-icon.placeholder {
-  background: var(--surface);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+/* ── Platform badge links ── */
+.plats { display: flex; gap: 5px; flex-shrink: 0; }
+
+.plat {
   font-family: var(--font-mono);
-  font-size: 0.6875rem;
+  font-size: 0.625rem;
   font-weight: 500;
   color: var(--muted);
-  border: 1px solid var(--border);
+  background: var(--surface);
+  padding: 3px 8px;
+  border-radius: 5px;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+  transition: background 0.12s, color 0.12s;
 }
+
+.plat:hover { background: var(--fg); color: var(--bg); }
+.plat:focus-visible { outline: 2px solid var(--fg); outline-offset: 2px; }
+
+/* ── Single-link icon card ── */
+.card-icon { padding: 12px 14px; gap: 12px; }
 
 .card-icon .card-name {
   flex: 1;
@@ -208,7 +186,17 @@ section {
   text-overflow: ellipsis;
 }
 
-/* ── Shared: tag + arrow ── */
+/* ── App icon ── */
+.app-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--icon-radius);
+  object-fit: cover;
+  flex-shrink: 0;
+  border: 1px solid var(--border);
+}
+
+/* ── Tag + arrow ── */
 .tag {
   font-family: var(--font-mono);
   font-size: 0.625rem;
@@ -223,12 +211,6 @@ section {
   flex-shrink: 0;
 }
 
-.arr {
-  color: var(--muted);
-  font-size: 0.875rem;
-  flex-shrink: 0;
-}
+.arr { color: var(--muted); font-size: 0.875rem; flex-shrink: 0; }
 
-@media (prefers-reduced-motion: reduce) {
-  .card { transition: none; }
-}
+@media (prefers-reduced-motion: reduce) { .card, .plat { transition: none; } }
