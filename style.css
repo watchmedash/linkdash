@@ -1,12 +1,13 @@
 :root {
-  --bg: #ffffff;
-  --fg: #0f0f0d;
-  --muted: #888882;
-  --border: #e8e8e4;
-  --surface: #f5f5f2;
+  --bg: #f4f7fb;
+  --fg: #080d1a;
+  --muted: #5a6a8a;
+  --border: #b8c8e0;
+  --surface: #e8eef8;
+  --accent: #1a52c8;
   --yt-red: #ff0000;
-  --radius: 12px;
-  --icon-radius: 10px;
+  --radius: 2px;
+  --icon-radius: 3px;
   --font-sans: 'IBM Plex Sans', system-ui, sans-serif;
   --font-mono: 'IBM Plex Mono', Consolas, monospace;
 }
@@ -40,22 +41,18 @@ header {
   height: 120px;
   border-radius: 50%;
   object-fit: cover;
-  border: 2px solid var(--border);
+  border: 2px solid var(--accent);
+  outline: 1px solid var(--border);
+  outline-offset: 3px;
 }
 
 header h1 {
-  font-size: 1.75rem;
-  font-weight: 700;
-  letter-spacing: -0.04em;
-  line-height: 1;
-}
-
-.role {
   font-family: var(--font-mono);
-  font-size: 0.75rem;
-  font-weight: 500;
-  color: var(--muted);
-  letter-spacing: 0.04em;
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  line-height: 1;
+  text-transform: uppercase;
 }
 
 /* ── Sections ── */
@@ -65,9 +62,12 @@ section { margin-bottom: 32px; }
   font-family: var(--font-mono);
   font-size: 0.6875rem;
   font-weight: 500;
-  color: var(--muted);
-  letter-spacing: 0.05em;
-  margin-bottom: 10px;
+  color: var(--accent);
+  letter-spacing: 0.12em;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  border-left: 2px solid var(--accent);
+  padding-left: 8px;
 }
 
 /* ── Base card shell ── */
@@ -79,17 +79,18 @@ section { margin-bottom: 32px; }
   border: 1px solid var(--border);
   border-radius: var(--radius);
   overflow: hidden;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
   background: var(--bg);
-  transition: box-shadow 0.15s, border-color 0.15s;
+  transition: border-color 0.12s, box-shadow 0.12s;
+  position: relative;
 }
 
 .card:is(a):hover {
-  box-shadow: 0 4px 20px rgba(0,0,0,0.07);
-  border-color: #ccccc8;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent), 2px 4px 16px rgba(26,82,200,0.08);
 }
 
-.card:is(a):focus-visible { outline: 2px solid var(--fg); outline-offset: 2px; }
+.card:is(a):focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
 /* ── YouTube card ── */
 .card-yt {
@@ -97,20 +98,20 @@ section { margin-bottom: 32px; }
   border-color: var(--yt-red);
   padding: 14px 16px;
   gap: 12px;
-  margin-bottom: 32px;
+  margin-bottom: 28px;
   color: #fff;
 }
 
 .card-yt:hover {
-  box-shadow: 0 4px 20px rgba(255,0,0,0.25) !important;
-  border-color: var(--yt-red) !important;
+  box-shadow: 0 0 0 1px #cc0000, 2px 4px 16px rgba(255,0,0,0.2) !important;
+  border-color: #cc0000 !important;
 }
 
 .yt-icon { display: flex; align-items: center; flex-shrink: 0; }
-.card-yt .card-name { flex: 1; font-family: var(--font-mono); font-size: 0.875rem; font-weight: 500; color: #fff; }
+.card-yt .card-name { flex: 1; font-family: var(--font-mono); font-size: 0.875rem; font-weight: 600; color: #fff; letter-spacing: 0.04em; }
 .card-yt .arr { color: rgba(255,255,255,0.7); }
 
-/* ── Cover-art game card (multi-platform) ── */
+/* ── Cover-art game card ── */
 .card-game {
   flex-direction: column;
   align-items: stretch;
@@ -129,9 +130,11 @@ section { margin-bottom: 32px; }
 }
 
 .game-name {
-  font-size: 0.9rem;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
   font-weight: 600;
-  padding: 12px 14px 10px;
+  letter-spacing: 0.03em;
+  padding: 10px 14px 8px;
 }
 
 .game-foot .plats {
@@ -143,17 +146,17 @@ section { margin-bottom: 32px; }
 
 .game-foot .plat {
   font-size: 0.75rem;
-  padding: 10px 14px;
+  padding: 9px 14px;
   border-radius: 0;
   background: transparent;
   border-bottom: 1px solid var(--border);
   text-align: left;
   display: block;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.08em;
 }
 
 .game-foot .plat:last-child { border-bottom: none; }
-.game-foot .plat:hover { background: var(--surface); color: var(--fg); }
+.game-foot .plat:hover { background: var(--surface); color: var(--accent); }
 
 /* ── Icon + multi-platform card ── */
 .card-multi {
@@ -164,8 +167,10 @@ section { margin-bottom: 32px; }
 
 .card-multi .card-name {
   flex: 1;
-  font-size: 0.9rem;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
   font-weight: 500;
+  letter-spacing: 0.03em;
   min-width: 0;
   white-space: nowrap;
   overflow: hidden;
@@ -182,24 +187,27 @@ section { margin-bottom: 32px; }
   color: var(--muted);
   background: var(--surface);
   padding: 3px 8px;
-  border-radius: 5px;
+  border-radius: var(--radius);
   text-decoration: none;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.08em;
   white-space: nowrap;
   transition: background 0.12s, color 0.12s;
+  border: 1px solid var(--border);
 }
 
-.plat:hover { background: var(--fg); color: var(--bg); }
-.plat:focus-visible { outline: 2px solid var(--fg); outline-offset: 2px; }
+.plat:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+.plat:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
 /* ── Single-link icon card ── */
 .card-icon { padding: 12px 16px; gap: 12px; }
 
 .card-icon .card-name {
   flex: 1;
-  font-size: 0.9rem;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
   font-weight: 500;
+  letter-spacing: 0.03em;
   min-width: 0;
   white-space: nowrap;
   overflow: hidden;
@@ -224,13 +232,14 @@ section { margin-bottom: 32px; }
   color: var(--muted);
   background: var(--surface);
   padding: 3px 7px;
-  border-radius: 5px;
-  letter-spacing: 0.05em;
+  border-radius: var(--radius);
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   white-space: nowrap;
   flex-shrink: 0;
+  border: 1px solid var(--border);
 }
 
-.arr { color: var(--muted); font-size: 0.875rem; flex-shrink: 0; }
+.arr { color: var(--accent); font-size: 0.875rem; flex-shrink: 0; opacity: 0.6; }
 
 @media (prefers-reduced-motion: reduce) { .card, .plat { transition: none; } }
