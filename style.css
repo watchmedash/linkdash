@@ -224,6 +224,9 @@ a:focus-visible { outline: 2px solid var(--signal); outline-offset: 2px; }
   flex-shrink: 0;
 }
 
+.ico-glyph { display: grid; place-items: center; color: var(--ink); }
+.email { overflow-wrap: anywhere; }
+
 /* ── Store routes (one per line) ── */
 .routes { list-style: none; border-top: 1px solid var(--line); }
 .routes li + li { border-top: 1px solid var(--line); }
