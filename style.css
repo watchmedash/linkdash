@@ -1,11 +1,10 @@
 :root {
-  --bg: #f5f7fb;
+  --bg: #f0f2f7;
   --card: #ffffff;
   --fg: #0d1117;
   --muted: #6b7a99;
   --border: #dde3f0;
-  --accent: #2563eb;
-  --accent-bg: #eff4ff;
+  --accent: #0ea5e9;
   --font-sans: 'IBM Plex Sans', system-ui, sans-serif;
   --font-mono: 'IBM Plex Mono', Consolas, monospace;
 }
@@ -17,7 +16,7 @@ body {
   color: var(--fg);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
-  padding-block: 64px 96px;
+  padding-block: 56px 96px;
   padding-left: max(16px, env(safe-area-inset-left, 0px));
   padding-right: max(16px, env(safe-area-inset-right, 0px));
 }
@@ -30,128 +29,154 @@ header {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  margin-bottom: 40px;
-  gap: 12px;
+  margin-bottom: 36px;
+  gap: 14px;
 }
 
 .avatar {
-  width: 120px;
-  height: 120px;
+  width: 88px;
+  height: 88px;
   border-radius: 50%;
   object-fit: cover;
-  border: 3px solid var(--card);
-  box-shadow: 0 0 0 1px var(--border), 0 4px 20px rgba(0,0,0,0.08);
+  box-shadow: 0 0 0 3px var(--card), 0 0 0 5px var(--accent);
 }
 
 header h1 {
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   font-weight: 700;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.03em;
   line-height: 1;
 }
 
 /* ── Sections ── */
-section { margin-bottom: 24px; }
+section { margin-bottom: 28px; }
 
 .section-label {
   font-family: var(--font-mono);
-  font-size: 0.65rem;
+  font-size: 0.625rem;
   font-weight: 500;
   color: var(--muted);
-  letter-spacing: 0.12em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  margin-bottom: 8px;
-  padding-left: 2px;
+  margin-bottom: 10px;
 }
-
-/* ── Base card ── */
-.card {
-  display: flex;
-  align-items: center;
-  text-decoration: none;
-  color: var(--fg);
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  margin-bottom: 6px;
-  transition: box-shadow 0.15s, border-color 0.15s;
-}
-
-.card:is(a):hover {
-  border-color: var(--accent);
-  box-shadow: 0 0 0 3px var(--accent-bg);
-}
-
-.card:is(a):focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
 /* ── YouTube ── */
 .card-yt {
-  background: #ff0000;
-  border-color: transparent;
-  padding: 14px 16px;
+  display: flex;
+  align-items: center;
   gap: 12px;
-  margin-bottom: 24px;
+  padding: 14px 16px;
+  background: #ff0000;
+  border-radius: 10px;
+  margin-bottom: 28px;
+  text-decoration: none;
   color: #fff;
-  border-radius: 8px;
+  transition: filter 0.15s;
 }
 
-.card-yt:hover { box-shadow: 0 4px 20px rgba(255,0,0,0.3) !important; border-color: transparent !important; }
+.card-yt:hover { filter: brightness(1.08); }
 .yt-icon { display: flex; align-items: center; flex-shrink: 0; }
 
 .card-yt .card-name {
   flex: 1;
   font-size: 0.9rem;
   font-weight: 600;
-  color: #fff;
 }
 
-.card-yt .arr { color: rgba(255,255,255,0.7); }
+.card-yt .arr { color: rgba(255,255,255,0.65); }
 
-/* ── Game card with cover ── */
-.card-game { flex-direction: column; align-items: stretch; padding: 0; overflow: hidden; }
+/* ── Game card — cover art with overlay ── */
+.card-game {
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 8px;
+  display: block;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
 
-.cover-wrap { width: 100%; height: 152px; overflow: hidden; }
-.cover-img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.cover-wrap {
+  width: 100%;
+  height: 200px;
+  display: block;
+}
 
-.game-foot { display: flex; flex-direction: column; }
+.cover-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.game-foot {
+  position: relative;
+  background: var(--card);
+  border-top: 1px solid var(--border);
+}
 
 .game-name {
-  font-size: 0.875rem;
-  font-weight: 600;
-  padding: 11px 14px 0;
+  font-size: 0.9rem;
+  font-weight: 700;
   letter-spacing: -0.01em;
+  padding: 12px 14px 10px;
 }
 
 .game-foot .plats {
   display: flex;
   flex-direction: column;
-  margin-top: 8px;
   border-top: 1px solid var(--border);
 }
 
 .game-foot .plat {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
   font-family: var(--font-mono);
-  font-size: 0.7rem;
+  font-size: 0.72rem;
   font-weight: 500;
   color: var(--muted);
-  padding: 9px 14px;
-  border-bottom: 1px solid var(--border);
-  display: block;
   text-decoration: none;
-  letter-spacing: 0.06em;
   text-transform: uppercase;
-  transition: color 0.1s, background 0.1s;
+  letter-spacing: 0.07em;
+  border-bottom: 1px solid var(--border);
+  transition: background 0.1s, color 0.1s;
 }
 
 .game-foot .plat:last-child { border-bottom: none; }
-.game-foot .plat:hover { color: var(--accent); background: var(--accent-bg); }
+
+.game-foot .plat::after {
+  content: '↗';
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  opacity: 0.4;
+}
+
+.game-foot .plat:hover {
+  background: var(--bg);
+  color: var(--accent);
+}
+
+.game-foot .plat:hover::after { opacity: 1; }
 
 /* ── Icon + multi-platform ── */
-.card-multi { padding: 12px 14px; gap: 12px; flex-wrap: wrap; }
+.card-multi {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 12px 14px;
+  background: var(--card);
+  border-radius: 10px;
+  margin-bottom: 8px;
+  border: 1px solid var(--border);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+}
 
 .card-multi .card-name {
   flex: 1;
-  font-size: 0.875rem;
+  font-size: 0.9rem;
   font-weight: 500;
   min-width: 0;
   white-space: nowrap;
@@ -159,17 +184,16 @@ section { margin-bottom: 24px; }
   text-overflow: ellipsis;
 }
 
-/* ── Platform badges ── */
 .plats { display: flex; gap: 5px; flex-shrink: 0; }
 
 .plat {
   font-family: var(--font-mono);
   font-size: 0.6rem;
-  font-weight: 500;
+  font-weight: 600;
   color: var(--muted);
   background: var(--bg);
-  padding: 3px 8px;
-  border-radius: 4px;
+  padding: 4px 9px;
+  border-radius: 5px;
   text-decoration: none;
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -180,12 +204,30 @@ section { margin-bottom: 24px; }
 
 .plat:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
 
-/* ── Icon card ── */
-.card-icon { padding: 12px 14px; gap: 12px; }
+/* ── Single icon card ── */
+.card-icon {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 14px;
+  background: var(--card);
+  border-radius: 10px;
+  margin-bottom: 8px;
+  border: 1px solid var(--border);
+  text-decoration: none;
+  color: var(--fg);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  transition: box-shadow 0.15s, border-color 0.15s;
+}
+
+.card-icon:hover {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(14,165,233,0.12);
+}
 
 .card-icon .card-name {
   flex: 1;
-  font-size: 0.875rem;
+  font-size: 0.9rem;
   font-weight: 500;
   min-width: 0;
   white-space: nowrap;
@@ -194,9 +236,9 @@ section { margin-bottom: 24px; }
 }
 
 .app-icon {
-  width: 40px;
-  height: 40px;
-  border-radius: 8px;
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
   object-fit: cover;
   flex-shrink: 0;
   border: 1px solid var(--border);
@@ -205,11 +247,11 @@ section { margin-bottom: 24px; }
 .tag {
   font-family: var(--font-mono);
   font-size: 0.6rem;
-  font-weight: 500;
+  font-weight: 600;
   color: var(--muted);
   background: var(--bg);
-  padding: 3px 7px;
-  border-radius: 4px;
+  padding: 4px 8px;
+  border-radius: 5px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   border: 1px solid var(--border);
@@ -218,4 +260,4 @@ section { margin-bottom: 24px; }
 
 .arr { color: var(--muted); font-size: 0.875rem; flex-shrink: 0; }
 
-@media (prefers-reduced-motion: reduce) { .card, .plat, .game-foot .plat { transition: none; } }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
