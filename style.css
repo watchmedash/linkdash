@@ -122,17 +122,22 @@ section { margin-bottom: 32px; }
 
 .game-foot {
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
   gap: 10px;
   padding: 12px 14px;
-  flex-wrap: wrap;
 }
 
 .game-name {
-  flex: 1;
   font-size: 0.9rem;
   font-weight: 600;
-  min-width: 0;
+}
+
+.game-foot .plats { gap: 8px; }
+
+.game-foot .plat {
+  font-size: 0.7rem;
+  padding: 5px 12px;
 }
 
 /* ── Icon + multi-platform card ── */
